@@ -36,4 +36,8 @@ lab.test('retorno da soma de A e B deve ser C', (done) => {
 
     Code.expect(soma(A, B)).to.equal(C);
     done();
+    lab.test('parâmetros string', (done) => {
+    const r = soma('a', 'b');
+    expect(r.message).to.equal("parâmentos inválidos")
+done();
 });
