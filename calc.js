@@ -1,18 +1,21 @@
-
 'use strict';
 
-function soma(a, b = 0) {
-  if (a === undefined)
+function soma(...elementos) {
+  const primeiroElemento = elementos[0];
+  if (primeiroElemento === undefined)
     return { message: 'parâmentos faltando'};
 
-  if (typeof a === 'string' || typeof b === 'string')
+  if (elementos.length === 1 && Array.isArray(primeiroElemento))
+    return primeiroElemento.somaElementos();
+
+  if (elementos.some(n => typeof n !== 'number'))
     return { message: 'parâmentos inválidos'};
 
-  let resultado = 0;
-  for(let i = 0; i < arguments.length; i++) {
-    resultado = resultado + arguments[i];
-  }
-  return resultado;
+  return elementos.somaElementos();
 }
+
+Array.prototype.somaElementos = function() {
+    return this.reduce((total, item) => total + item, 0);
+};
 
 module.exports = { soma };
